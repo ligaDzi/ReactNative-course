@@ -2,14 +2,13 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
 import SignIn from './components/auth/SignIn'
-import Hello from './components/Hello'
+import Event from './components/event/Event'
 
 export class Root extends Component {
     render() {
         return (
             <View style={styles}>
-                <SignIn />
-                <Hello />
+                <Event />
             </View>
         )
     }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, TextInput } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, TouchableHighlight } from 'react-native'
 
 export class SignIn extends Component {
 
@@ -29,8 +29,15 @@ export class SignIn extends Component {
                     value={password} 
                     onChangeText={this.setPassword} 
                 />
+                <TouchableOpacity onPress={this.signIn}>
+                    <Text>SIGN IN</Text>
+                </TouchableOpacity>
             </View>
         )
+    }
+
+    signIn = () => {
+        console.log('---', 'sign in')
     }
 
     setEmail = email => this.setState({ email }) 
