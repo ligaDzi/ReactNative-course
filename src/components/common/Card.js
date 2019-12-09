@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native'
 
 export class Card extends Component {
     render() {
-        const { children, style } = this.props
+	const { children, style } = this.props
         return (
             <View style={[style, styles.container]}>
                 {children}
