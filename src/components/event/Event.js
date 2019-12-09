@@ -3,13 +3,8 @@ import { View, Text, Image, Button, StyleSheet } from 'react-native'
 
 import ConfirmModal from '../common/ConfirmModal'
 
-import { eventList } from '../../fixtures'
 
 export class Event extends Component {
-
-    static defaultProps = {
-        event: eventList[0]        
-    }
     
     state = {
         confirmModal: false
@@ -34,7 +29,7 @@ export class Event extends Component {
                         title='Delete Event'
                         color='#F55'
                         onPress={this.handleDelete}
-                    />
+                    />   
                 </View>
                 <ConfirmModal
                     visible = {this.state.confirmModal}
