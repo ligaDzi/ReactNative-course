@@ -16,7 +16,7 @@ const AppNavigator = createStackNavigator({
         screen: EventList
     }
 }, {
-    initialRouteName: 'auth'
+    initialRouteName: 'eventList'
 })
 
 export default createAppContainer(AppNavigator)

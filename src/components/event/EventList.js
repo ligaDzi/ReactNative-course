@@ -4,13 +4,9 @@ import groupBy from 'lodash/groupBy'
 
 import EventCard from './EventCard'
 
-import { eventList } from '../../fixtures'
 
 export class EventList extends Component {
 
-    static defaultProps = {
-        events: eventList
-    }
 
     render() {
         const { events, onEventPress, navigation } = this.props

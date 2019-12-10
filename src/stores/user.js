@@ -2,10 +2,10 @@ import { observable } from 'mobx'
 
 
 class User {
-    @observable email: ''
-    @observable password: ''
+    @observable email = ''
+    @observable password = ''
 
-    user: null
+    user = null
 }
 
 export default new User()
