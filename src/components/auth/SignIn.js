@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { observer } from 'mobx-react'
+import { observer, inject } from 'mobx-react'
 import firebase from 'firebase'
 import { View, Text, TextInput, TouchableOpacity, TouchableHighlight } from 'react-native'
 
@@ -9,6 +9,7 @@ import userStore from '../../stores/user'
 export class SignIn extends Component {
 
     render() {
+        const { user } = this.props
         return (
             <View>
                 <Text style={styles.header}>Please Sign In</Text>
@@ -17,7 +18,7 @@ export class SignIn extends Component {
                 <TextInput 
                     style={styles.input}
                     keyboardType='email-address'
-                    value={userStore.email} 
+                    value={user.email} 
                     onChangeText={this.setEmail}                 
                 />
 
@@ -25,7 +26,7 @@ export class SignIn extends Component {
                 <TextInput 
                     style={styles.input}
                     secureTextEntry
-                    value={userStore.password} 
+                    value={user.password} 
                     onChangeText={this.setPassword} 
                 />
                 <TouchableOpacity onPress={this.signIn}>
@@ -38,17 +39,19 @@ export class SignIn extends Component {
     signIn = () => {
         console.log('-----', 'Sign In')
 
+        const { user } = this.props
+
         firebase.auth()
-            .signInWithEmailAndPassword(userStore.email, userStore.password)
-            .then( user => {
-                userStore.user = user
+            .signInWithEmailAndPassword(user.email, user.password)
+            .then( userEntity => {
+                user.user = userEntity
                 this.props.navigation.navigate('eventList')
             })
             .catch( err => console.error(err))
     }
 
-    setEmail = email => userStore.email = email 
-    setPassword = password => userStore.password = password
+    setEmail = email => this.props.user.email = email 
+    setPassword = password => this.props.user.password = password
 }
 
 const styles = {
@@ -62,4 +65,4 @@ const styles = {
     }
 }
 
-export default SignIn
+export default inject('user')( SignIn )

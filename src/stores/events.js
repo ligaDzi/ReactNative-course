@@ -1,9 +1,15 @@
-import { observable, computed } from 'mobx'
+import { observable, computed, action } from 'mobx'
 import firebase from 'firebase'
 import { entitiesFromFB } from './utils'
-import { data } from '../fixtures'
 
-class Events {
+import BasicStore from './BasicStore'
+
+class Events extends BasicStore {
+
+    constructor(...args) {
+        super(...args)
+    }
+
     @observable loading = false
     @observable loaded = false
 
@@ -17,8 +23,11 @@ class Events {
         return Object.keys(this.entities).length
     }
 
-    loadAll() {
+    @action loadAll() {
         this.loading = true
+
+        //Проверка получения информации из другого стора
+        console.log('------', 'email', this.getStore('user').test)
 
         firebase.database().ref('events')
             .once('value')
@@ -31,4 +40,6 @@ class Events {
     }
 }
 
-export default new Events()
+export const event = new Events()
+
+export default Events

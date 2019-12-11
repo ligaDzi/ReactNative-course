@@ -1,11 +1,21 @@
 import { observable } from 'mobx'
 
+import BasicStore from './BasicStore'
 
-class User {
+
+class User extends BasicStore {
+
+    constructor(...args) {
+        super(...args)
+    }
+
+    @observable test = 'TEST'
     @observable email = ''
     @observable password = ''
 
-    user = null
+    @observable user = null
+
+    
 }
 
-export default new User()
+export default User

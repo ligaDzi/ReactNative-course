@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
+import { observer, inject } from 'mobx-react'
 import { View, Text, Button, StyleSheet } from 'react-native'
 
 import Event from '../../components/event/Event'
 
 import { eventList } from '../../fixtures'
 
+
+@observer
 export class EventScreen extends Component {
 
     static navigationOptions = ({ navigation }) => ({
@@ -12,8 +15,10 @@ export class EventScreen extends Component {
     })
 
     render() {
-        const uid = this.props.navigation.getParam('uid')
-        const event = eventList.filter( event => event.uid === uid)[0]
+        const { navigation, events } = this.props
+        
+        const uid = navigation.getParam('uid')
+        const event = events.entities[uid]
 
         return (
             <View>
@@ -24,4 +29,4 @@ export class EventScreen extends Component {
     }
 }
 
-export default EventScreen
+export default inject('events')( EventScreen )

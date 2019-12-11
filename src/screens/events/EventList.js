@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { observer } from 'mobx-react'
+import { observer, inject } from 'mobx-react'
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
 
-import eventStore from '../../stores/events'
 
 import EventList from '../../components/event/EventList'
 
@@ -15,15 +14,15 @@ export class EventListScreen extends Component {
     }
 
     componentDidMount() {
-        eventStore.loadAll()
+        this.props.events.loadAll()
     }
 
     render() {
-        const { navigation } = this.props
+        const { navigation, events } = this.props
 
-        if(eventStore.loading) return this.getLoader()
+        if(events.loading) return this.getLoader()
 
-        return <EventList onEventPress={this.handleEventPress} navigation={navigation} events={eventStore.list} />
+        return <EventList onEventPress={this.handleEventPress} navigation={navigation} events={events.list} />
     }
 
     handleEventPress = (uid) => {
@@ -36,4 +35,4 @@ export class EventListScreen extends Component {
 
 }
 
-export default EventListScreen
+export default inject('events')(EventListScreen)
