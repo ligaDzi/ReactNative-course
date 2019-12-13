@@ -1,15 +1,14 @@
 import { observable } from 'mobx'
 
-import BasicStore from './BasicStore'
+import EntitiesStore from './EntitiesStore'
 
 
-class User extends BasicStore {
+class User extends EntitiesStore {
 
     constructor(...args) {
         super(...args)
     }
-
-    @observable test = 'TEST'
+    
     @observable email = ''
     @observable password = ''
 
